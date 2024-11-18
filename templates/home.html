@@ -1,3 +1,126 @@
-<h1>
-    hello world
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Time Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 20px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .mapping {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .mapping h2 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .mapping ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mapping li {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Delivery Time Prediction</h1>
+
+    <!-- Main Input Form -->
+    <form action="{{ url_for('predict') }}" method="post">
+      <input type="text" name="Delivery_person_Age" placeholder="Delivery Person Age" required />
+      <input type="text" name="Delivery_person_Ratings" placeholder="Delivery Person Ratings" required />
+      <input type="text" name="Weatherconditions" placeholder="Weather Conditions (e.g., 0, 1, 2)" required />
+      <input type="text" name="Road_traffic_density" placeholder="Road Traffic Density (e.g., 0, 1, 2, 3)" required />
+      <input type="text" name="Vehicle_condition" placeholder="Vehicle Condition" required />
+      <input type="text" name="Type_of_vehicle" placeholder="Type of Vehicle (e.g., 0, 1, 2, 3)" required />
+      <input type="text" name="City" placeholder="City (e.g., 0, 1, 2)" required />
+      <input type="text" name="distance" placeholder="Distance (in km)" required />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <!-- Mapping Information -->
+    <div class="mapping">
+      <h2>Encoding Information</h2>
+      <ul>
+        <li><strong>Type of Vehicle:</strong> 0 = Motorcycle, 1 = Scooter, 2 = Electric Scooter, 3 = Bicycle</li>
+        <li><strong>Road Traffic Density:</strong> 0 = Low, 1 = Medium, 2 = High, 3 = Jam</li>
+        <li><strong>Weather Conditions:</strong> 
+          0 = Sunny, 1 = Stormy, 2 = Sandstorms, 3 = Cloudy/Fog/Windy
+        </li>
+        <li><strong>City:</strong> 0 = Urban, 1 = Metropolitian, 2 = Semi-Urban</li>
+      </ul>
+    </div>
+
+    <!-- Display prediction result -->
+    <div>
+      {{ prediction_text }}
+    </div>
+  </div>
+</body>
+
+</html>
