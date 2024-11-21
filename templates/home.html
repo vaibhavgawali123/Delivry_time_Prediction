@@ -40,7 +40,7 @@
       flex-direction: column;
     }
 
-    input {
+    input, select {
       padding: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
@@ -50,7 +50,7 @@
 
     button {
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color: #1d80c6;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -59,28 +59,7 @@
     }
 
     button:hover {
-      background-color: #45a049;
-    }
-
-    .mapping {
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .mapping h2 {
-      font-size: 18px;
-      color: #333;
-    }
-
-    .mapping ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .mapping li {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #555;
+      background-color: #0c5ae9;
     }
   </style>
 </head>
@@ -93,28 +72,54 @@
     <form action="{{ url_for('predict') }}" method="post">
       <input type="text" name="Delivery_person_Age" placeholder="Delivery Person Age" required />
       <input type="text" name="Delivery_person_Ratings" placeholder="Delivery Person Ratings" required />
-      <input type="text" name="Weatherconditions" placeholder="Weather Conditions (e.g., 0, 1, 2)" required />
-      <input type="text" name="Road_traffic_density" placeholder="Road Traffic Density (e.g., 0, 1, 2, 3)" required />
-      <input type="text" name="Vehicle_condition" placeholder="Vehicle Condition" required />
-      <input type="text" name="Type_of_vehicle" placeholder="Type of Vehicle (e.g., 0, 1, 2, 3)" required />
-      <input type="text" name="City" placeholder="City (e.g., 0, 1, 2)" required />
+
+      <!-- Dropdown for Weather Conditions -->
+      <select name="Weatherconditions" required>
+        <option value="" disabled selected>Select Weather Condition</option>
+        <option value="0">Sunny</option>
+        <option value="1">Stormy</option>
+        <option value="2">Sandstorms</option>
+        <option value="3">Cloudy/Fog/Windy</option>
+      </select>
+
+      <!-- Dropdown for Road Traffic Density -->
+      <select name="Road_traffic_density" required>
+        <option value="" disabled selected>Select Road Traffic Density</option>
+        <option value="0">Low</option>
+        <option value="1">Medium</option>
+        <option value="2">High</option>
+        <option value="3">Jam</option>
+      </select>
+
+      <!-- Dropdown for Vehicle Condition -->
+      <select name="Vehicle_condition" required>
+        <option value="" disabled selected>Select Vehicle Condition</option>
+        <option value="0">Bad</option>
+        <option value="1">Good</option>
+        <option value="2">Best</option>
+      </select>
+
+      <!-- Dropdown for Type of Vehicle -->
+      <select name="Type_of_vehicle" required>
+        <option value="" disabled selected>Select Type of Vehicle</option>
+        <option value="0">Motorcycle</option>
+        <option value="1">Scooter</option>
+        <option value="2">Electric Scooter</option>
+        <option value="3">Bicycle</option>
+      </select>
+
+      <!-- Dropdown for City -->
+      <select name="City" required>
+        <option value="" disabled selected>Select City</option>
+        <option value="0">Urban</option>
+        <option value="1">Metropolitan</option>
+        <option value="2">Semi-Urban</option>
+      </select>
+
       <input type="text" name="distance" placeholder="Distance (in km)" required />
 
       <button type="submit">Predict</button>
     </form>
-
-    <!-- Mapping Information -->
-    <div class="mapping">
-      <h2>Encoding Information</h2>
-      <ul>
-        <li><strong>Type of Vehicle:</strong> 0 = Motorcycle, 1 = Scooter, 2 = Electric Scooter, 3 = Bicycle</li>
-        <li><strong>Road Traffic Density:</strong> 0 = Low, 1 = Medium, 2 = High, 3 = Jam</li>
-        <li><strong>Weather Conditions:</strong> 
-          0 = Sunny, 1 = Stormy, 2 = Sandstorms, 3 = Cloudy/Fog/Windy
-        </li>
-        <li><strong>City:</strong> 0 = Urban, 1 = Metropolitian, 2 = Semi-Urban</li>
-      </ul>
-    </div>
 
     <!-- Display prediction result -->
     <div>
